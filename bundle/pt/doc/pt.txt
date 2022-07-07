@@ -1,0 +1,167 @@
+pt.txt*   Plugin that integrates pt with Vim
+
+==============================================================================
+INTRODUCTION                                                               *pt*
+
+This plugin is a front for the_platinum_searcher: pt. Pt can be used as a
+replacement for ack. This plugin will allow you to run pt from vim, and shows
+the results in a split window.
+
+:Pt[!] [options] {pattern} [{directory}]                                  *:Pt*
+
+    Search recursively in {directory} (which defaults to the current
+    directory) for the {pattern}. Behaves just like the |:grep| command, but
+    will open the |Quickfix| window for you. If [!] is not given the first
+    error is jumped to.
+
+:PtBuffer[!] [options] {pattern}                                    *:PtBuffer*
+
+    Search for {pattern} in all open buffers. Behaves just like the |:grep|
+    command, but will open the |Quickfix| window for you. If [!] is not given
+    the first error is jumped to.
+
+    Note: this will not find changes in modified buffers, since pt can only
+    find what is on disk! You can save buffers automatically when searching
+    with the 'autowrite' option. A buffer will be ignored if it is a directory
+    (an explorer, like netrw).
+
+:PtAdd [options] {pattern} [{directory}]                               *:PtAdd*
+
+    Just like |:Pt|, but instead of making a new list, the matches are
+    appended to the current |quickfix| list.
+
+:PtFromSearch [{directory}]                                     *:PtFromSearch*
+
+    Just like |:Pt| but the pattern is from previous search.
+
+:LPt [options] {pattern} [{directory}]                                   *:LPt*
+
+    Just like |:Pt| but instead of the |quickfix| list, matches are placed in
+    the current |location-list|.
+
+:LPtBuffer [options] {pattern}                                     *:LPtBuffer*
+
+    Just like |:PtBuffer| but instead of the |quickfix| list, matches are
+    placed in the current |location-list|.
+
+:LPtAdd [options] {pattern} [{directory}]                             *:LPtAdd*
+
+    Just like |:PtAdd| but instead of the |quickfix| list, matches are added
+    to the current |location-list|
+
+:PtFile [options] {pattern} [{directory}]                             *:PtFile*
+
+    Search recursively in {directory} (which defaults to the current
+    directory) for filenames matching the {pattern}. Behaves just like the
+    |:grep| command, but will open the |Quickfix| window for you.
+
+:PtHelp[!] [options] {pattern}                                        *:PtHelp*
+
+    Search vim documentation files for the {pattern}. Behaves just like the
+    |:Pt| command, but searches only vim documentation .txt files
+
+:LPtHelp [options] {pattern}                                         *:LPtHelp*
+
+    Just like |:PtHelp| but instead of the |quickfix| list, matches are placed
+    in the current |location-list|.
+
+Files containing the search term will be listed in the split window, along
+with the line number of the occurrence, once for each occurrence. <Enter> on a
+line in this window will open the file, and place the cursor on the matching
+line.
+
+See http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/ for
+more information.
+
+==============================================================================
+OPTIONS                                                            *pt-options*
+
+                                                                     *g:pt_prg*
+The location of the Pt program, and any options you want passed to it before
+searching. Default: "pt --vimgrep" (for parsable output). Example: >
+  let g:pt_prg="pt --vimgrep --smart-case"
+<
+Note: the `--vimgrep` option was added in Pt 0.25.0. If pt.vim detects that
+you're using a lower version, the following default will be used instead: >
+  let g:pt_prg="pt --column --nogroup --noheading"
+<
+This works around inconsistent behaviors in earlier Pt versions, but it is
+recommended that you upgrade if possible for a better experience. `--vimgrep`
+supports multiple matches on the same line of text, for example.
+
+For background, see: https://github.com/rking/pt.vim/pull/88
+
+                                                               *g:pt_highlight*
+If 1, highlight the search terms after searching. Default: 0. Example: >
+  let g:pt_highlight=1
+<
+
+                                                                  *g:pt_format*
+Format to recognize the matches. See 'errorformat' for more info. Default:
+"%f" when searching for files, "%f:%l:%c:%m" if not otherwise set. For
+example, if your `g:pt_prg` is set to just "pt" (no column numbers in the
+output, so when you jump to a match your cursor will be on the start of the
+line): >
+  let g:pt_format="%f:%l:%m"
+<
+
+                                                         *g:pt_apply_lmappings*
+Whether or not to add custom mappings to location list windows opened by this
+plugin. Only applies if you're using the location list. Default 1. Example: >
+  let g:pt_apply_lmappings=0
+<
+
+                                                         *g:pt_apply_qmappings*
+Whether or not to add custom mappings to quickfix windows opened by this
+plugin. Only applies if you're using the error list. Default 1. Example: >
+  let g:pt_apply_qmappings=0
+<
+
+                                                                *g:pt_lhandler*
+A custom command used to open the location list after it's populated.
+Default: "botright lopen". You might want to set this to change where the
+location list is opened, or what size it is. Example: >
+  let g:pt_lhandler="topleft lopen"
+<
+
+                                                                *g:pt_qhandler*
+A custom command used to open the error list after it's populated. Default:
+"botright copen". You might want to set this to change where the quickfix
+window is opened, or what size it is. Example: >
+  let g:pt_qhandler="copen 20"
+<
+
+                                                         *g:pt_mapping_message*
+Whether or not to show the message explaining the extra mappings that are
+added to the results list this plugin populates. This message is not shown if
+the mappings are not applied (see |g:pt_apply_qmappings| and
+|g:pt_apply_lmappings| for more info. Default 1. Example: >
+  let g:pt_mapping_message=0
+<
+
+==============================================================================
+MAPPINGS                                                         *pt-mappings*
+
+The following keyboard shortcuts are available in the quickfix window:
+
+e                   open file and close the quickfix window.
+
+o                   open file (same as enter).
+
+go                  preview file (open but maintain focus on pt.vim results).
+
+t                   open in a new tab.
+
+T                   open in new tab silently.
+
+h                   open in horizontal split.
+
+H                  open in horizontal split silently.
+
+v                   open in vertical split.
+
+gv                  open in vertical split silently.
+
+q                   close the quickfix window.
+
+  vim:tw=78:fo=tcq2:ft=help:norl:
