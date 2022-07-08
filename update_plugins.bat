@@ -10,15 +10,6 @@ set VIMEXE=c:\cloud\apps\nvim\bin\nvim.exe
 rmdir /Q /S %TEMPDIR%
 mkdir %TEMPDIR%
 
-:: [==== ANSIBLE ====]
-:: Ansible YAML: Ansible syntax checker that supports ansible-lint
-:: git clone --depth 1 https://github.com/chase/vim-ansible-yaml.git %TEMPDIR%\ansible-yaml
-:: Modify the filetype detection in the plugin so its used for all yaml files
-:: sed -i "s/if fp.*/if fp =~ '.*\\\.y\\\(a\\\)\\\?ml$'/" %TEMPDIR%\ansible-yaml\ftdetect\ansible.vim
-:: Will limit loading of ft=ansible only for yaml files under ansible/*
-:: sed -i "s/if fp.*/if fp =~ 'ansible\/.*\\\.y\\\(a\\\)\\\?ml$'/" bundle\ansible-yaml\ftdetect\ansible.vim
-:: "if fp =~ '/ansible/.*\.y\(a\)\?ml$' || fp =~ '/\(group\|host\)_vars/'
-
 :: [==== COLORS ====]
 :: Base16 Vim: An architecture for building themes using a base of sixteen colors
 git clone --depth 1 https://github.com/chriskempson/base16-vim.git %TEMPDIR%\base16
@@ -32,6 +23,10 @@ git clone --depth 1 https://github.com/whatyouhide/vim-gotham %TEMPDIR%\gotham
 git clone --depth 1 https://github.com/godlygeek/tabular.git %TEMPDIR%\tabular
 
 :: [==== GENERAL ====]
+:: Airline: Lean & mean status/tabline for vim that's light as air
+git clone --depth 1 https://github.com/vim-airline/vim-airline.git %TEMPDIR%\airline
+:: Airline-Themes: This is the official theme repository for vim-airline
+git clone --depth 1 https://github.com/vim-airline/vim-airline-themes.git %TEMPDIR%\airline-themes
 :: AutoComplPop: Fork that does not automatically select first item in popup menu
 :: More here: https://bitbucket.org/ns9tks/vim-autocomplpop/issue/53/make-autoselection-of-the-first-item
 git clone --depth 1 https://github.com/dirkwallenstein/vim-autocomplpop %TEMPDIR%\autocomplpop
@@ -39,8 +34,14 @@ git clone --depth 1 https://github.com/dirkwallenstein/vim-autocomplpop %TEMPDIR
 git clone --depth 1 https://github.com/moll/vim-bbye.git %TEMPDIR%\bbye
 :: L9: Dependency for autocomplpop
 git clone --depth 1 https://github.com/vim-scripts/L9.git %TEMPDIR%\L9
+:: lightline: A light and configurable statusline/tabline plugin for Vim
+:: git clone --depth 1 https://github.com/itchyny/lightline.vim.git %TEMPDIR%\lightline
 :: Markdown: Syntax highlighting, matching rules and mappings for the original Markdown and extensions
 git clone --depth 1 https://github.com/preservim/vim-markdown.git %TEMPDIR%\markdown
+:: Tabline: Configure tab labels within Terminal Vim with a very succinct output
+::          Only used for vim-airline to get tab index #'s to show; couldn't
+::          figure out how to do it in vim-airline without this plugin
+git clone --depth 1 https://github.com/mkitt/tabline.vim %TEMPDIR%\tabline
 
 :: [==== GENERAL CODING ====]
 :: ALE (Asynchronous Lint Engine): Plugin providing linting (syntax checking and semantic errors)
@@ -54,7 +55,8 @@ git clone --depth 1 https://github.com/tpope/vim-endwise.git %TEMPDIR%\endwise
 :: Repeat: Required to repeat actions with '.' in surround and commentary plugins
 git clone --depth 1 https://github.com/tpope/vim-repeat.git %TEMPDIR%\repeat
 :: Space Jam: This plugin automatically removes trailing whitespace for ruby, python, javascript, et al
-:: It provides automated removal of whitespace while "Better Whitespace" provides highlighting
+::            It provides automated removal of whitespace while
+::            "Better Whitespace" provides highlighting
 git clone --depth 1 https://github.com/rondale-sc/vim-spacejam.git %TEMPDIR%\spacejam
 :: Surround: Makes handling surrounding structures like '' () [] fun!
 git clone --depth 1 https://github.com/tpope/vim-surround.git %TEMPDIR%\surround
@@ -70,15 +72,6 @@ git clone --depth 1 https://github.com/tpope/vim-fugitive.git %TEMPDIR%\fugitive
 :: git clone --depth 1 https://github.com/airblade/vim-gitgutter.git %TEMPDIR%\gitgutter
 :: gitv: Provides a commit browser for the repo or a specific file
 :: git clone --depth 1 https://github.com/gregsexton/gitv.git %TEMPDIR%\gitv
-
-:: [==== PYTHON ====]
-:: jedi-vim: awesome Python autocompletion with VIM
-:: git clone --depth 1 --recursive https://github.com/davidhalter/jedi-vim.git %TEMPDIR%\jedi-vim
-:: cd %TEMPDIR%\jedi-vim
-:: git submodule update --init
-:: cd ..\..\
-:: Python-mode: Can conflict with jedi-vim according to https://github.com/davidhalter/jedi-vim/issues/163
-:: git clone --depth 1 https://github.com/python-mode/python-mode %TEMPDIR%\python-mode
 
 :: [==== SEARCH ====]
 :: ctrlsf: An ack/ag/pt powered search and view tool

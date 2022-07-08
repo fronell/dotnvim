@@ -506,6 +506,7 @@ ale-php-phpcbf	ale-php.txt	/*ale-php-phpcbf*
 ale-php-phpcs	ale-php.txt	/*ale-php-phpcs*
 ale-php-phpmd	ale-php.txt	/*ale-php-phpmd*
 ale-php-phpstan	ale-php.txt	/*ale-php-phpstan*
+ale-php-pint	ale-php.txt	/*ale-php-pint*
 ale-php-psalm	ale-php.txt	/*ale-php-psalm*
 ale-php-tlint	ale-php.txt	/*ale-php-tlint*
 ale-po-options	ale-po.txt	/*ale-po-options*
@@ -1197,6 +1198,9 @@ b:ale_php_phpstan_configuration	ale-php.txt	/*b:ale_php_phpstan_configuration*
 b:ale_php_phpstan_executable	ale-php.txt	/*b:ale_php_phpstan_executable*
 b:ale_php_phpstan_level	ale-php.txt	/*b:ale_php_phpstan_level*
 b:ale_php_phpstan_memory-limit	ale-php.txt	/*b:ale_php_phpstan_memory-limit*
+b:ale_php_pint_executable	ale-php.txt	/*b:ale_php_pint_executable*
+b:ale_php_pint_options	ale-php.txt	/*b:ale_php_pint_options*
+b:ale_php_pint_use_global	ale-php.txt	/*b:ale_php_pint_use_global*
 b:ale_php_psalm_executable	ale-php.txt	/*b:ale_php_psalm_executable*
 b:ale_php_psalm_options	ale-php.txt	/*b:ale_php_psalm_options*
 b:ale_php_psalm_use_global	ale-php.txt	/*b:ale_php_psalm_use_global*
@@ -2047,6 +2051,9 @@ g:ale_php_phpstan_configuration	ale-php.txt	/*g:ale_php_phpstan_configuration*
 g:ale_php_phpstan_executable	ale-php.txt	/*g:ale_php_phpstan_executable*
 g:ale_php_phpstan_level	ale-php.txt	/*g:ale_php_phpstan_level*
 g:ale_php_phpstan_memory-limit	ale-php.txt	/*g:ale_php_phpstan_memory-limit*
+g:ale_php_pint_executable	ale-php.txt	/*g:ale_php_pint_executable*
+g:ale_php_pint_options	ale-php.txt	/*g:ale_php_pint_options*
+g:ale_php_pint_use_global	ale-php.txt	/*g:ale_php_pint_use_global*
 g:ale_php_psalm_executable	ale-php.txt	/*g:ale_php_psalm_executable*
 g:ale_php_psalm_options	ale-php.txt	/*g:ale_php_psalm_options*
 g:ale_php_psalm_use_global	ale-php.txt	/*g:ale_php_psalm_use_global*

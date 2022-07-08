@@ -16,8 +16,7 @@ set ruler
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable "Enable syntax highlighting
-syntax on
+colorscheme base16-default-dark
 
 " NOTE: guifont must be set in init.vim for Neovide!
 " Consolas chosen because its monospace & default font for VS Code
@@ -25,15 +24,15 @@ set guifont=Consolas:h14
 " Lucida Console is a monospace alternative
 "set guifont=Lucida\ Console:h14
 
-colorscheme base16-default-dark
+syntax enable "Enable syntax highlighting
+syntax on
 
+set ffs=unix,dos,mac "Default file types
 set encoding=utf8
 try
     lang en_US
 catch
 endtry
-
-set ffs=unix,dos,mac "Default file types
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -145,21 +144,22 @@ set splitright
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Reference this page for status line syntax:
 " http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
-set laststatus=2                             " always show the status bar
-set statusline=[%n]\                         " buffer number
-set statusline+=%F\ %m\ %r                   " filename, modified, readonly
-set statusline+=%{&paste?'[paste]':''}\      " Shows if paste mode is enabld
-set statusline+=[%{&ff}]\                    " file format
-set statusline+=%y%*\                        " file type
-set statusline+=%{fugitive#statusline()}     " fugitive
-set statusline+=%=                           " Left/right seperator
-set statusline+=CWD:%{getcwd()}              " Current working directory
-set statusline+=%3(\ %)                      " Add 3 spaces
-set statusline+=[%l,%v]\                     " current line, current row
-set statusline+=[%p%%,%L]                    " % position, total lines
-set statusline+=%#warningmsg#                " Recommended for Syntastic
-set statusline+=%{SyntasticStatuslineFlag()} " Recommended for Syntastic
-set statusline+=%*
+" set laststatus=2                             " always show the status bar
+" set statusline=[%n]\                         " buffer number
+" set statusline+=%F\ %m\ %r                   " filename, modified, readonly
+" set statusline+=%{&paste?'[paste]':''}\      " Shows if paste mode is enabld
+" set statusline+=[%{&ff}]\                    " file format
+" set statusline+=%y%*\                        " file type
+" set statusline+=%{fugitive#statusline()}     " fugitive
+" set statusline+=%=                           " Left/right seperator
+" set statusline+=CWD:%{getcwd()}              " Current working directory
+" set statusline+=%3(\ %)                      " Add 3 spaces
+" set statusline+=[%l,%v]\                     " current line, current row
+" set statusline+=[%p%%,%L]                    " % position, total lines
+" set statusline+=%#warningmsg#                " Recommended for Syntastic
+" set statusline+=%{SyntasticStatuslineFlag()} " Recommended for Syntastic
+" set statusline+=%*
+set laststatus=3 " Show only one status line with the active buffer info
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -412,6 +412,33 @@ let g:ackpreview = 1
 let g:ack_autoclose = 1
 let g:ackhighlight = 1
 
+" Airline
+let g:airline_theme='badwolf'
+"let g:airline_theme='base16_shell'
+"let g:airline_theme='owo'
+
+" Airline supports creating sections using statusline items or using 'parts'
+" which are keywords unique to Airline that will show specific metadata
+" Section using statusline items (:help airline-customization)
+" :help statusline for a list of statusline items
+let g:airline_section_c = '[%n] %F%m%r'
+" Section using parts (:help airline-advanced-customization)
+let g:airline_section_y = airline#section#create_left(['%{getcwd()}', 'ffenc'])
+let g:airline_section_z = '%l:%v %3p%%/%L'
+" Configure the layout of the sections using the 2 arrays below
+" 1st array is for left-side sections and 2nd array is for right-side sections
+" (:help airline-default)
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'error', 'warning', 'y', 'x', 'z' ] ]
+" Show buffers in the tab bar if no tabs are open.  Enabling this breaks
+" showing the tab index number in the tab bar if tabs are created
+"let g:airline#extensions#tabline#enabled = 1
+" Show buffer numbers if buffers are in the tab bar
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+" Show only the filename of the buffer in a tab
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
 " AutoComplPop
 let g:acp_behaviorKeywordLength = 3
 
@@ -424,20 +451,28 @@ let g:ctrlp_extensions = ['tag']
 "" Setting to 0 tells CtrlP to use CWD
 let g:ctrlp_working_path_mode = 0
 
-" Python-mode
-"" Set to python3 for Python 3
-let g:pymode_python = 'python3'
+" lightline
+" let g:lightline = {
+"       \ 'colorscheme': 'nord',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste', 'gitbranch' ],
+"       \             [ 'filename', 'readonly', 'modified' ] ],
+"       \   'right': [ [ 'cwd', 'fileformat', 'fileencoding', 'filetype',
+"       \                'lineinfo', 'percent' ] ]
+"       \ },
+"       \ 'component': {
+"       \   'cwd': '%{getcwd()}',
+"       \   'filename': '[%n] %t',
+"       \   'percent': '%3p%%/%L',
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'FugitiveHead'
+"       \ },
+"       \ }
 
 " Taglist
 "" Place taglist on the right side
 let Tlist_Use_Right_Window = 1
-
-" vim-ruby
-let g:ruby_indent_access_modifier_style = 'outdent'
-
-" vim-textobj-rubyblock
-"" required dependency
-runtime macros/matchit.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
