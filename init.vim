@@ -98,12 +98,17 @@ set wildignore+=*.exe,*.dll,*.doc*,*.xls*
 set number
 " Turn on line relative line numbering
 set relativenumber
+" Turn on sign column that is used to place signs next to lines of interest
+set signcolumn=yes
 
 " Set backspace config
 set backspace=eol,start,indent
 
+" Give more space for displaying messages
+set cmdheight=2
+
 " Searching
-set hlsearch     "Highlight search things
+set nohlsearch   "Turn off highlighted items after search is complete
 set incsearch    "Make search act like search in modern browsers
 set ignorecase   "Ignore case when searching
 set smartcase    "Overrides ignore case if search pattern has upper case chars
@@ -132,11 +137,14 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " Minimal number of screen lines to keep above and below the cursor.
-set scrolloff=5
+set scrolloff=8
 
 " How splits should open by default
 set nosplitbelow
 set splitright
+
+" Default is 4000ms (4 seconds) which can lead to delays & poor user experience
+set updatetime=50
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -438,6 +446,7 @@ let g:airline#extensions#default#layout = [
 "let g:airline#extensions#tabline#buffer_nr_show = 1
 " Show only the filename of the buffer in a tab
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#wordcount#enabled = 0
 
 " AutoComplPop
 let g:acp_behaviorKeywordLength = 3

@@ -54,10 +54,6 @@ git clone --depth 1 https://github.com/tpope/vim-commentary %TEMPDIR%\commentary
 git clone --depth 1 https://github.com/tpope/vim-endwise.git %TEMPDIR%\endwise
 :: Repeat: Required to repeat actions with '.' in surround and commentary plugins
 git clone --depth 1 https://github.com/tpope/vim-repeat.git %TEMPDIR%\repeat
-:: Space Jam: This plugin automatically removes trailing whitespace for ruby, python, javascript, et al
-::            It provides automated removal of whitespace while
-::            "Better Whitespace" provides highlighting
-git clone --depth 1 https://github.com/rondale-sc/vim-spacejam.git %TEMPDIR%\spacejam
 :: Surround: Makes handling surrounding structures like '' () [] fun!
 git clone --depth 1 https://github.com/tpope/vim-surround.git %TEMPDIR%\surround
 :: Tagbar: Displays tags ordered by scope
