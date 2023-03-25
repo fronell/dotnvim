@@ -1,44 +1,17 @@
-# Linux Setup
-
-Install the appropriate Vim package to get scripting support:
-
-Distro | Package
------- | -------
-RHEL   | vim-enhanced
-Ubuntu | vim-nox
-
-The steps below delete the existing Vim configuration so be careful!
-
-```bash
-cd ~
-rm -f ~/.vimrc
-rm -rf ~/.vim
-git clone https://github.com/fronell/dotvim.git
-ln -s ~/dotvim .vim
-ln -s ~/dotvim/vimrc ~/.vimrc
-# Used by ctags in Vim
-touch ~/.vimtags
-```
-
 # Windows Setup
 
-The following URL contains a Vim for Windows that is compiled with scripting support and continually updated.  Download and extract to any folder of choice:
+Download the latest stable version of Neovim from:
 
-https://tuxproject.de/projects/vim/x64/
-
-Check which version of Visual Studio Vim was compiled with because you will need
-the C++ redistributables for that version installed for Vim to work.
+https://github.com/neovim/neovim/releases/tag/stable
 
 The steps below delete the existing Vim configuration so be careful!
 
 From a console with Admin rights (Admin is needed to create symlinks):
 
 ```
-cd %USERPROFILE%
-rmdir vimfiles /S /Q
-git clone https://github.com/fronell/dotvim.git vimfiles
-del _vimrc
-mklink _vimrc vimfiles\vimrc
+cd %USERPROFILE%\AppData\Local
+rmdir nvim /S /Q
+git clone https://github.com/fronell/dotnvim.git nvim
 ```
 
 ## pt

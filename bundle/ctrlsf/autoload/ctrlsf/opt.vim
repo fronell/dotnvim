@@ -78,6 +78,11 @@ func! ctrlsf#opt#GetOpt(name) abort
     endif
 endf
 
+function! ctrlsf#opt#IsContextZero()
+  let context = ctrlsf#opt#GetContext()
+  return (has_key(context, 'context') && context.context == 0)
+endfunction
+
 " GetContext()
 "
 " Return a dict contains 'after', 'before' and/or 'context'
@@ -308,10 +313,20 @@ func! s:ParseOptions(options_str) abort
     return options
 endf
 
+function! ctrlsf#opt#Options()
+    return s:options
+endfunction
+
 " ParseOptions()
 "
-func! ctrlsf#opt#ParseOptions(options_str) abort
-    let s:options = s:ParseOptions(a:options_str)
+func! ctrlsf#opt#ParseOptions(options_str, override = v:false) abort
+    let opts = s:ParseOptions(a:options_str)
+
+    if a:override
+        call extend(s:options, opts, 'force')
+    else
+        let s:options = opts
+    endif
 
     " derivative options
 

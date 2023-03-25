@@ -1,8 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "=> General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible    "Break vi compatbility, should be set first
-
 " Enable pathogen
 call pathogen#infect()
 
@@ -18,17 +16,12 @@ set ruler
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme base16-default-dark
 
-" NOTE: guifont must be set in init.vim for Neovide!
-" Consolas chosen because its monospace & default font for VS Code
-set guifont=Consolas:h14
-" Lucida Console is a monospace alternative
-"set guifont=Lucida\ Console:h14
-
 syntax enable "Enable syntax highlighting
 syntax on
 
 set ffs=unix,dos,mac "Default file types
 set encoding=utf8
+
 try
     lang en_US
 catch
@@ -67,7 +60,7 @@ set listchars=tab:▸\ ,eol:¬,trail:•
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
+" => User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This needs to be at the bottom to because it gets overrided by something
 " above -- csworn 2011.08.03
@@ -88,11 +81,11 @@ set wildmenu
 set wildmode=longest,list,full
 "" Ignore these files during tab completion
 """ Common
-set wildignore+=.git,.hg,.svn,*.sw?,*.tmp,*.zip,*.pdf
+set wildignore+=.git,.hg,*.pdf,.svn,*.sw?,*.tmp,*.zip
 """ OSX/Linux
 set wildignore+=.DS_Store,*.so
 """ Windows
-set wildignore+=*.exe,*.dll,*.doc*,*.xls*
+set wildignore+=*.dll,*.doc*,*.exe,*.xls*
 
 " Turn on line numbering
 set number
@@ -150,23 +143,6 @@ set updatetime=50
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => STATUS LINE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Reference this page for status line syntax:
-" http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
-" set laststatus=2                             " always show the status bar
-" set statusline=[%n]\                         " buffer number
-" set statusline+=%F\ %m\ %r                   " filename, modified, readonly
-" set statusline+=%{&paste?'[paste]':''}\      " Shows if paste mode is enabld
-" set statusline+=[%{&ff}]\                    " file format
-" set statusline+=%y%*\                        " file type
-" set statusline+=%{fugitive#statusline()}     " fugitive
-" set statusline+=%=                           " Left/right seperator
-" set statusline+=CWD:%{getcwd()}              " Current working directory
-" set statusline+=%3(\ %)                      " Add 3 spaces
-" set statusline+=[%l,%v]\                     " current line, current row
-" set statusline+=[%p%%,%L]                    " % position, total lines
-" set statusline+=%#warningmsg#                " Recommended for Syntastic
-" set statusline+=%{SyntasticStatuslineFlag()} " Recommended for Syntastic
-" set statusline+=%*
 set laststatus=3 " Show only one status line with the active buffer info
 
 
@@ -183,17 +159,6 @@ set ttyfast
 " nocursorline is recommended but I like it so I'll keep it here just as a
 " reminder to turn it off if vim gets slow
 set cursorline
-
-" Possible fix if editing ruby files becomes slow
-" Reference: http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
-"set re=1
-
-" Possible fix if editing large xml files becomes slow
-"set synmaxcol=200
-
-" Possible fix for syntax highlighting slowing things down
-" Reference: http://vim.wikia.com/wiki/Fix_syntax_highlighting
-"syntax sync minlines=200
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -215,7 +180,7 @@ map <C-l> <C-W>l
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => COMMAND MODE MAPPINGS
+" => INSERT MODE MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cycle through autocomplete options using tab
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-g>u\<Tab>"
@@ -225,11 +190,11 @@ inoremap kj <esc>
 
 " Save and remain in insert mode
 inoremap <F2> <C-o>:w<cr>
-inoremap df <C-o>:w<cr>
+" inoremap df <C-o>:w<cr> "This causes a delay when typing pdf
 
 " Save and exit insert mode
 inoremap <F3> <esc>:w<cr>
-inoremap fd <esc>:w<cr>
+" inoremap fd <esc>:w<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

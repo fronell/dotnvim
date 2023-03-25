@@ -10,6 +10,26 @@ set VIMEXE=c:\cloud\apps\nvim\bin\nvim.exe
 rmdir /Q /S %TEMPDIR%
 mkdir %TEMPDIR%
 
+:: [==== CODING GENERAL ====]
+:: ALE (Asynchronous Lint Engine): Plugin providing linting (syntax checking and semantic errors)
+git clone --depth 1 https://github.com/dense-analysis/ale.git %TEMPDIR%\ale
+:: Commentary: Toggle commenting lines in multiple languages
+git clone --depth 1 https://github.com/tpope/vim-commentary %TEMPDIR%\commentary
+:: Endwise: Automatically closes programming structures like adding an end to Ruby blocks
+git clone --depth 1 https://github.com/tpope/vim-endwise.git %TEMPDIR%\endwise
+:: Surround: Makes handling surrounding structures like '' () [] fun!
+git clone --depth 1 https://github.com/tpope/vim-surround.git %TEMPDIR%\surround
+::   Repeat: Required to repeat actions with '.' in surround and commentary plugins
+git clone --depth 1 https://github.com/tpope/vim-repeat.git %TEMPDIR%\repeat
+:: Tagbar: Displays tags ordered by scope
+git clone --depth 1 https://github.com/majutsushi/tagbar.git %TEMPDIR%\tagbar
+:: Togglelist: Allows for a binding to toggle the quicklist and locationlist
+git clone --depth 1 https://github.com/milkypostman/vim-togglelist.git %TEMPDIR%\togglelist
+
+:: [==== CODING SPECIFIC ====]
+:: Markdown: Syntax highlighting, matching rules and mappings for the original Markdown and extensions
+git clone --depth 1 https://github.com/preservim/vim-markdown.git %TEMPDIR%\markdown
+
 :: [==== COLORS ====]
 :: Base16 Vim: An architecture for building themes using a base of sixteen colors
 git clone --depth 1 https://github.com/chriskempson/base16-vim.git %TEMPDIR%\base16
@@ -21,45 +41,27 @@ git clone --depth 1 https://github.com/whatyouhide/vim-gotham %TEMPDIR%\gotham
 :: [==== FORMATTING ====]
 :: Tabular: Makes aligning text fun!
 git clone --depth 1 https://github.com/godlygeek/tabular.git %TEMPDIR%\tabular
+:: Better Whitespace: Highlights trailing whitespace and can remove them all
+git clone --depth 1 https://github.com/ntpeters/vim-better-whitespace.git %TEMPDIR%\better-whitespace
 
 :: [==== GENERAL ====]
 :: Airline: Lean & mean status/tabline for vim that's light as air
 git clone --depth 1 https://github.com/vim-airline/vim-airline.git %TEMPDIR%\airline
 :: Airline-Themes: This is the official theme repository for vim-airline
 git clone --depth 1 https://github.com/vim-airline/vim-airline-themes.git %TEMPDIR%\airline-themes
+::   Tabline: Configure tab labels within Terminal Vim with a very succinct output
+::            Only used for vim-airline to get tab index #'s to show; couldn't
+::            figure out how to do it in vim-airline without this plugin
+git clone --depth 1 https://github.com/mkitt/tabline.vim %TEMPDIR%\tabline
 :: AutoComplPop: Fork that does not automatically select first item in popup menu
-:: More here: https://bitbucket.org/ns9tks/vim-autocomplpop/issue/53/make-autoselection-of-the-first-item
+::               More here: https://bitbucket.org/ns9tks/vim-autocomplpop/issue/53/make-autoselection-of-the-first-item
 git clone --depth 1 https://github.com/dirkwallenstein/vim-autocomplpop %TEMPDIR%\autocomplpop
+::   L9: Dependency for autocomplpop
+git clone --depth 1 https://github.com/vim-scripts/L9.git %TEMPDIR%\L9
 :: Bbye: Deleting a buffer without closing the window
 git clone --depth 1 https://github.com/moll/vim-bbye.git %TEMPDIR%\bbye
-:: L9: Dependency for autocomplpop
-git clone --depth 1 https://github.com/vim-scripts/L9.git %TEMPDIR%\L9
 :: lightline: A light and configurable statusline/tabline plugin for Vim
 :: git clone --depth 1 https://github.com/itchyny/lightline.vim.git %TEMPDIR%\lightline
-:: Markdown: Syntax highlighting, matching rules and mappings for the original Markdown and extensions
-git clone --depth 1 https://github.com/preservim/vim-markdown.git %TEMPDIR%\markdown
-:: Tabline: Configure tab labels within Terminal Vim with a very succinct output
-::          Only used for vim-airline to get tab index #'s to show; couldn't
-::          figure out how to do it in vim-airline without this plugin
-git clone --depth 1 https://github.com/mkitt/tabline.vim %TEMPDIR%\tabline
-
-:: [==== GENERAL CODING ====]
-:: ALE (Asynchronous Lint Engine): Plugin providing linting (syntax checking and semantic errors)
-git clone --depth 1 https://github.com/dense-analysis/ale.git %TEMPDIR%/ale
-:: Better Whitespace: Highlights trailing whitespace and can remove them all
-git clone --depth 1 https://github.com/ntpeters/vim-better-whitespace.git %TEMPDIR%\better-whitespace
-:: Commentary: Toggle commenting lines in multiple languages
-git clone --depth 1 https://github.com/tpope/vim-commentary %TEMPDIR%\commentary
-:: Endwise: Automatically closes programming structures like adding an end to Ruby blocks
-git clone --depth 1 https://github.com/tpope/vim-endwise.git %TEMPDIR%\endwise
-:: Repeat: Required to repeat actions with '.' in surround and commentary plugins
-git clone --depth 1 https://github.com/tpope/vim-repeat.git %TEMPDIR%\repeat
-:: Surround: Makes handling surrounding structures like '' () [] fun!
-git clone --depth 1 https://github.com/tpope/vim-surround.git %TEMPDIR%\surround
-:: Tagbar: Displays tags ordered by scope
-git clone --depth 1 https://github.com/majutsushi/tagbar.git %TEMPDIR%\tagbar
-:: Togglelist: Allows for a binding to toggle the quicklist and locationlist
-git clone --depth 1 https://github.com/milkypostman/vim-togglelist.git %TEMPDIR%\togglelist
 
 :: [==== GIT ====]
 :: Fugitive: Git management in Vim

@@ -15,6 +15,7 @@
 :TagbarToggle	tagbar.txt	/*:TagbarToggle*
 :TagbarTogglePause	tagbar.txt	/*:TagbarTogglePause*
 g:tagbar_autoclose	tagbar.txt	/*g:tagbar_autoclose*
+g:tagbar_autoclose_netrw	tagbar.txt	/*g:tagbar_autoclose_netrw*
 g:tagbar_autofocus	tagbar.txt	/*g:tagbar_autofocus*
 g:tagbar_autopreview	tagbar.txt	/*g:tagbar_autopreview*
 g:tagbar_autoshowtag	tagbar.txt	/*g:tagbar_autoshowtag*

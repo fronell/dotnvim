@@ -44,8 +44,8 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'vbStatement,vbnetStorage,vbnetProcedure,vbnet.*Words,AspVBSStatement'
   autocmd FileType vim
         \ let b:endwise_addition = '\=submatch(0)=~"aug\\%[roup]" ? submatch(0) . " END" : "end" . submatch(0)' |
-        \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try,aug\%[roup]\%(\s\+\cEND\)\@!' |
-        \ let b:endwise_end_pattern = '\%(end\%(fu\%[nction]\|wh\%[hile]\|if\|for\|try\)\)\|aug\%[roup]\%(\s\+\cEND\)' |
+        \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try,def,aug\%[roup]\%(\s\+\cEND\)\@!' |
+        \ let b:endwise_end_pattern = '\%(end\%(fu\%[nction]\|wh\%[hile]\|if\|for\|try\|def\)\)\|aug\%[roup]\%(\s\+\cEND\)' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand,vimAugroupKey,vimAugroup,vimAugroupError'
   autocmd FileType c,cpp,xdefaults,haskell
         \ let b:endwise_addition = '#endif' |
@@ -62,11 +62,11 @@ augroup endwise " {{{1
         \ let b:endwise_words = 'ifdef,ifndef,ifeq,ifneq,define' |
         \ let b:endwise_pattern = '^\s*\(d\zsef\zeine\|\zsif\zen\=\(def\|eq\)\)\>' |
         \ let b:endwise_syngroups = 'makePreCondit,makeDefine'
-  autocmd FileType verilog
+  autocmd FileType verilog,systemverilog
         \ let b:endwise_addition = 'end&' |
-        \ let b:endwise_words = 'begin,module,case,function,primitive,specify,task' |
-        \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\)\>.*$' |
-        \ let b:endwise_syngroups = 'verilogConditional,verilogLabel,verilogStatement'
+        \ let b:endwise_words = 'begin,module,case,function,primitive,specify,task,generate,package,interface,class,program,property,sequence,table,clocking,checker,config' |
+        \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\|generate\|package\|interface\|class\|program\|property\|sequence\|table\|clocking\|checker\|config\)\>' |
+        \ let b:endwise_syngroups = 'verilogConditional,verilogLabel,verilogStatement,systemverilogStatement'
   autocmd FileType matlab
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,if,for,switch,while,try' |
@@ -89,7 +89,7 @@ augroup endwise " {{{1
 augroup END " }}}1
 
 function! s:abbrev() abort
-  if get(g:, 'endwise_abbreviations', 0) && &buftype =~# '^\%(nowrite\|acwrite\)\=$'
+  if get(g:, 'endwise_abbreviations', 0) && &buftype =~# '^\%(nowrite\)\=$'
     for word in split(get(b:, 'endwise_words', ''), ',')
       execute 'iabbrev <buffer><script>' word word.'<CR><SID>(endwise-append)<Space><C-U><BS>'
     endfor
@@ -101,7 +101,7 @@ endfunction
 function! EndwiseAppend(...) abort
   if !a:0 || type(a:1) != type('')
     return "\<C-R>=EndwiseDiscretionary()\r"
-  elseif a:1 =~# "\r"
+  elseif a:1 =~# "\r" && &buftype =~# '^\%(nowrite\)\=$'
     return a:1 . "\<C-R>=EndwiseDiscretionary()\r"
   else
     return a:1
@@ -138,7 +138,7 @@ function! s:DefineMap() abort
   elseif rhs =~? '<cr>' || rhs =~# '<[Pp]lug>\w\+CR'
     exe "imap <silent> <CR>" rhs."<SID>(endwise-append)"
   else
-    imap <script> <CR> <CR><SID>(endwise-append)
+    imap <silent><script><expr> <CR> EndwiseAppend("<Bslash>r")
   endif
 endfunction
 call s:DefineMap()
@@ -156,7 +156,7 @@ endfunction
 
 function! s:crend(always) abort
   let n = ""
-  if &buftype !~# '^\%(nowrite\|acwrite\)\=$' || !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
+  if &buftype !~# '^\%(nowrite\)\=$' || !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
     return n
   endif
   let synids = join(map(split(b:endwise_syngroups, ','), 'hlID(v:val)'), ',')
