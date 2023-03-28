@@ -16,7 +16,7 @@ if exists("g:neovide")
   " set guifont=Lucida\ Console:h14
 else
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " => Neovim-QT Settings
+  " => Neovim Qt Settings
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   if exists(':GuiFont')
     " Consolas chosen because its monospace & default font for VS Code

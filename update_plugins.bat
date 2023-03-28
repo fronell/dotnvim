@@ -2,7 +2,6 @@ setlocal
 
 set TEMPDIR=temp
 set BUNDLEDIR=bundle
-set FTPLUGINDIR=ftplugin
 set VIMEXE=c:\cloud\apps\nvim\bin\nvim.exe
 
 :: We use a temp dir so we can exclude .git and .gitignore files when we
@@ -60,8 +59,6 @@ git clone --depth 1 https://github.com/dirkwallenstein/vim-autocomplpop %TEMPDIR
 git clone --depth 1 https://github.com/vim-scripts/L9.git %TEMPDIR%\L9
 :: Bbye: Deleting a buffer without closing the window
 git clone --depth 1 https://github.com/moll/vim-bbye.git %TEMPDIR%\bbye
-:: lightline: A light and configurable statusline/tabline plugin for Vim
-:: git clone --depth 1 https://github.com/itchyny/lightline.vim.git %TEMPDIR%\lightline
 
 :: [==== GIT ====]
 :: Fugitive: Git management in Vim
@@ -90,13 +87,6 @@ rmdir /q /s %BUNDLEDIR%
 mkdir %BUNDLEDIR%
 robocopy temp\ bundle\ /mir /xd .git .github /xf .gitignore
 rmdir /q /s %TEMPDIR%
-
-:: Rebuild ftplugin for plugins that don't come in bundle form
-:: rmdir /q /s %FTPLUGINDIR%
-:: mkdir %FTPLUGINDIR%
-:: cd %FTPLUGINDIR%
-:: curl https://raw.githubusercontent.com/fronell/dotvim/master/ftplugin/python_fn.vim > python_vn.vim
-:: cd ..
 
 :: Generate Help Tags for new plugins or updated docs in existing plugins
 %VIMEXE% -c Helptags -c q

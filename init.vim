@@ -333,8 +333,7 @@ map <Leader>vz :call VimuxZoomRunner()<CR>
 """ Non-work specific directories
 """" Set CWD to the directory of the currently open file
 map <Leader>wcc :cd %:p:h<CR>
-""" Work specific directories
-map <Leader>wwc :cd C:\repos\NetworkGroup\WAN\configOmatic<CR>
+""" Specific directories
 map <Leader>wwr :cd c:\repos<CR>
 
 " W
